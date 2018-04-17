@@ -11,8 +11,7 @@
 #define MAX_CHANNELS 512
 
 byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0x5E, 0xE2 };  //MAC ETHERNETSHIELD
-byte ip[] = { 10, 0, 0, 177 };  //Not used
-char serverName[] = "atalanta.saproto.nl";
+char serverName[] = "utils.saproto.nl";
 EthernetClient Ethernetconnection;
 int port = 80;
 HttpClient client = HttpClient(Ethernetconnection, serverName, port);
