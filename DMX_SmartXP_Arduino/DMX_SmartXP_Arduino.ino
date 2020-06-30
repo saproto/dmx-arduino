@@ -11,7 +11,7 @@
 #define MAX_CHANNELS 512
 
 byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0x5E, 0xE2 };  //MAC ETHERNETSHIELD
-char serverName[] = "utils.saproto.nl";
+char serverName[] = "http.saproto.nl";
 EthernetClient Ethernetconnection;
 int port = 80;
 HttpClient client = HttpClient(Ethernetconnection, serverName, port);
@@ -112,7 +112,7 @@ void parseJson(String response) {
 }
 
 /*
-   Requests the needed data with a GET request from "Host: utils.saproto.nl" to update the DMX system
+   Requests the needed data with a GET request from "Host: http.saproto.nl" to update the DMX system
 */
 void makeAPIRequest() {
   //reconnect if the connection to the server is lost
@@ -121,8 +121,8 @@ void makeAPIRequest() {
     Ethernetconnection.connect(serverName, 80);
   }
   Serial.println("connected");
-  Ethernetconnection.println("GET /smartxp-dmx/ HTTP/1.1");
-  Ethernetconnection.println("Host: utils.saproto.nl");
+  Ethernetconnection.println("GET /dmx_proxy/ HTTP/1.1");
+  Ethernetconnection.println("Host: http.saproto.nl");
   Ethernetconnection.println();
 }
 
