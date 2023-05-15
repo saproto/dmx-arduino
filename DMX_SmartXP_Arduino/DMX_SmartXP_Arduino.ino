@@ -11,7 +11,7 @@
 #define MAX_CHANNELS 512
 
 byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0x5E, 0xE2 };  //MAC ETHERNETSHIELD
-char serverName[] = "http.saproto.nl";
+char serverName[] = "utils.saproto.nl";
 EthernetClient Ethernetconnection;
 int port = 80;
 HttpClient client = HttpClient(Ethernetconnection, serverName, port);
@@ -34,15 +34,13 @@ void setup()
   //Setup DMX Shield
   DmxMaster.usePin(3);
   DmxMaster.maxChannel(MAX_CHANNELS);
-
   // Start the Ethernet connection
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP");
     // No point in carrying on, so do nothing forevermore:
     for (;;)
-      ;
+    ;
   }
-
   resetDMX();  //turn off all lights on startup
 }
 
@@ -121,8 +119,8 @@ void makeAPIRequest() {
     Ethernetconnection.connect(serverName, 80);
   }
   Serial.println("connected");
-  Ethernetconnection.println("GET /dmx_proxy/ HTTP/1.1");
-  Ethernetconnection.println("Host: http.saproto.nl");
+  Ethernetconnection.println("GET /api/dmx_values HTTP/1.1");
+  Ethernetconnection.println("Host: utils.saproto.nl");
   Ethernetconnection.println();
 }
 
@@ -144,5 +142,3 @@ void setDMXChannel(int channel, int value) {
   Serial.println(value);
   dmxChannel[channel] = value;
 }
-
-
